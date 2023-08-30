@@ -10,13 +10,14 @@ RUN mkdir -p /app
 COPY . /app
 COPY ./src /app
 
+# Setelah menyalin file-file proyek Anda, instal dependensi menggunakan Composer
 RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer"
 RUN cd /app && \
     /usr/local/bin/composer install --no-dev
 
+# Setelah menginstal dependensi, jalankan 'php artisan optimize'
+WORKDIR /app
 RUN chown -R www-data: /app
-
-WORKDIR /app/src
 RUN php artisan optimize
 RUN php artisan cache:clear
 RUN php artisan route:clear
