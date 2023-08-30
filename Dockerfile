@@ -15,6 +15,8 @@ RUN cd /app && \
     /usr/local/bin/composer install --no-dev
 
 RUN chown -R www-data: /app
+
+WORKDIR /app/src
 RUN php artisan optimize
 RUN php artisan cache:clear
 RUN php artisan route:clear
