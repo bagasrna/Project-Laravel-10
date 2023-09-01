@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ArtisanController;
+use App\Http\Controllers\Api\FileUploadController;
 
 Route::group(['prefix' => 'artisan'], function () {
     Route::get('/key', [ArtisanController::class, 'key']);
@@ -13,3 +14,6 @@ Route::group(['prefix' => 'artisan'], function () {
     Route::get('/user', [ArtisanController::class, 'user']);
     Route::get('/user/create', [ArtisanController::class, 'userCreate']);
 });
+
+Route::get('/get-file', [FileUploadController::class, 'getFileToCloud']);
+Route::post('/upload-file', [FileUploadController::class, 'uploadFileToCloud']);
